@@ -1,8 +1,11 @@
-import Favicon from "./Favicon"
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Montserrat } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  variable: "--Montserrat"
+})
 
 export const metadata = {
   title: 'Bpaste',
@@ -14,10 +17,9 @@ export default function RootLayout(
 ) {
   return (
     <html lang="en">
-			<head>
-        <Favicon />
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${montserrat.variable}`}>
+        {children}
+      </body>
     </html>
   )
 }

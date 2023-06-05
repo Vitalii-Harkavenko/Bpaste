@@ -1,7 +1,8 @@
-export default function Home() {
+export default async function Home() {
+
   return (
     <>
-    hi mom
+      <h1></h1>
     </>
   )
 }

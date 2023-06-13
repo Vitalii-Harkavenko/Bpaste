@@ -1,7 +1,7 @@
 const CardHero = () => {
   return (
-	<div className="mx-8 my-4">
-		<div className="flex flex-row gap-4">
+	<div className="px-8 py-4 bg-gradient-to-r from-[#262D2D] to-[#171C1C] rounded-md">
+		<div className="flex flex-row gap-4 items-center">
       <div className="
         h-12 w-12 rounded-full bg-gradient-to-bl from-lime-400 to-yellow-300 text-white
         text-2xl justify-center items-center flex">

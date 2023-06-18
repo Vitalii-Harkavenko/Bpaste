@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar"
 import './globals.css'
 import { Inter, Montserrat } from 'next/font/google'
 
@@ -18,6 +19,9 @@ export default function RootLayout(
   return (
     <html lang="en">
       <body className={`${inter.className} ${montserrat.variable}`}>
+        <div className="sticky top-0 left-0 w-screen h-20 py-5 px-8 backdrop-blur-xl bg-main">
+          <Navbar/>
+        </div>
         {children}
       </body>
     </html>

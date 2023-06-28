@@ -11,5 +11,4 @@ const searchQuery = async (query: string) => {
   });
   return result;
 }
-
-export default searchQuery;
+export { searchQuery };

@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
 
@@ -13,7 +13,7 @@ export default function SearchBar() {
 	};
 
 	return (
-		<div className="w-full h-full bg-[#1D2C2F] text-text-color rounded-md flex items-center justify-between px-6">
+		<div className="w-full h-full bg-[#1D2C2F] text-text-color rounded-md grid grid-cols-[1fr,2rem] items-center gap-12 px-6">
 			<input 
 				className="bg-transparent outline-none"
 				placeholder="Search for anything"
@@ -22,7 +22,11 @@ export default function SearchBar() {
 				onChange={(e) => setSearchValue(e.target.value)}
 				onKeyDown={(e) => { if (e.key === "Enter") handleSubmit() }}
 			/>
-			<button>BEBERA</button>
+			<button>
+				<div className="relative w-8 h-8">
+					<Image src="/assets/options.svg" fill alt="optionts"></Image>
+				</div>
+			</button>
 		</div>
 	)
 }

@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "setup.css";
+
+.main-button {
+	@apply py-2 px-4 border-solid border-white rounded-md border-[1px] transition-all duration-300 cursor-pointer
+}

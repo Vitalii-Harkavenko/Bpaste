@@ -17,3 +17,5 @@ export default function NewPost() {
 		</main>
 	)
 }
+// add account authentification
+// create a CREATE function

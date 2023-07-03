@@ -30,7 +30,7 @@ export default function Results() {
 			<p>{responseData}</p>
 		</div>
 	  : responseData.map(item => (
-		<div key={item.id}>
+		<div key={item.id} className="w-full p-8 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
 			<p>{item.username}</p>
 		</div>
 	  ))}

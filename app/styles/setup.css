@@ -1,11 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
 	box-sizing: border-box;
 }
-html, body {
+
+html,
+body {
 	width: 100%;
 	height: 100vh;
 	display: flex;
@@ -16,19 +14,29 @@ html, body {
 	line-height: 1.5;
 	@apply bg-main
 }
-h1, h2, h3, .h3 {
+
+h1,
+h2,
+h3,
+.h3 {
 	font-family: var(--Montserrat);
 	color: white;
 }
+
 h1 {
 	font-size: 3.3rem;
 	font-weight: 700;
 }
-h3, .h3 {
+
+h3,
+.h3 {
 	font-size: 1.5rem;
 	font-weight: 600;
 }
-p, pre, input {
+
+p,
+pre,
+input {
 	font-size: 1rem;
 	color: #D6D6D6;
 }

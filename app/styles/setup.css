@@ -38,5 +38,8 @@ p,
 pre,
 input {
 	font-size: 1rem;
-	color: #D6D6D6;
+	@apply bg-transparent outline-none text-text-color
+}
+main {
+	@apply text-text-color w-full h-full
 }

@@ -1,15 +1,32 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-const searchQuery = async (query: string) => {
+export const searchQuery = async (query: string) => {
   const keywords = query.split(' ');
   const result = await prisma.users.findMany({
     where: {
-      username: {
+      name: {
         in: keywords
       }
     }
   });
   return result;
-}
-export { searchQuery };
+};
+
+export const createUser = async ({
+  name, password
+}: {
+  name: string, password: string
+}) => {
+  try {
+    await prisma.users.create({
+      data: {
+        name,
+        password,
+      },
+    });
+    return "The account was created"
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+} 

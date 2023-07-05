@@ -24,16 +24,16 @@ export default function Results() {
 	};
 
 	return (
-    <main>
-      { typeof responseData === "string"
-	  ? <div>
-			<p>{responseData}</p>
-		</div>
-	  : responseData.map(item => (
-		<div key={item.id} className="w-full p-8 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
-			<p>{item.username}</p>
-		</div>
-	  ))}
-    </main>
+		<main>
+			{ typeof responseData === "string"
+			? <div>
+					<p>{responseData}</p>
+				</div>
+			: responseData.map(item => (
+				<div key={item.id} className="w-full p-8 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
+					<p>{item.name}</p>
+				</div>
+			))}
+		</main>
 	)
 }

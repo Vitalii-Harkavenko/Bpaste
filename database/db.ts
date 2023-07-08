@@ -25,8 +25,32 @@ export const createUser = async ({
         password,
       },
     });
-    return "The account was created"
+    return {name: name, password: password};
   } catch (error) {
     console.error("An error occurred:", error);
   }
-} 
+}
+export const loginUser = async ({
+  name,
+  password,
+}: {
+  name: string;
+  password: string;
+}) => {
+  try {
+    const user = await prisma.users.findUnique({
+      where: {
+        name,
+      },
+    });
+    if (!user) {
+      return 'Username is wrong';
+    }
+    if (user.password !== password) {
+      return 'Password is wrong';
+    }
+    return {name: name, password: password};
+  } catch (error) {
+    console.error('Error during user login:', error);
+  }
+};

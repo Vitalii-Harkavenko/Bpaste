@@ -1,21 +1,36 @@
 "use client"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import { checkUser } from "@/app/utils";
 
 const SignUp = () => {
 
+	const [user, setUser] = useState(checkUser());
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
+	const router = useRouter();
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		
-		await fetch('/api/create-user', {
+		const response = await fetch('/api/create-user', {
 			method: 'POST',
-			headers: {
-			'Content-Type': 'application/json',
-			},
 			body: JSON.stringify({name, password}),
 		});
+		const user = await response.json()
+		localStorage.setItem('user', JSON.stringify(user));
+		setUser(checkUser())
 	};
+
+	const navigateToBaseUrl = () => {
+		if (checkUser()) {
+			router.push('/');
+		}
+	};
+	useEffect(() => {
+		if (user !== null) {
+		navigateToBaseUrl();
+		}
+	}, [user]);
 
 	return (
 		<form className="flex flex-col gap-4" onSubmit={handleSubmit}>

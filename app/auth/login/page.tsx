@@ -1,14 +1,13 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState} from "react";
+import { navigateToBaseUrl } from "@/app/utils";
 import { useRouter } from 'next/navigation';
-import { checkUser } from "@/app/utils";
 
 const LogIn = () => {
-
-	const [user, setUser] = useState(checkUser());
+	
+	const router = useRouter();
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
-	const router = useRouter();
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -18,19 +17,8 @@ const LogIn = () => {
 		});
 		const user = await response.json()
 		localStorage.setItem('user', JSON.stringify(user));
-		setUser(checkUser())
+		navigateToBaseUrl(router);
 	};
-
-	const navigateToBaseUrl = () => {
-		if (checkUser()) {
-			router.push('/');
-		}
-	};
-	useEffect(() => {
-		if (user !== null) {
-		navigateToBaseUrl();
-		}
-	}, [user]);
 
 	return (
 		<form className="flex flex-col gap-4" onSubmit={handleSubmit}>

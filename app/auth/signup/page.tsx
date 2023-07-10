@@ -17,7 +17,10 @@ const SignUp = () => {
 	};
 
 	return (
-		<AuthForm title="Create an account" buttonText="Sign Up" submitFunction={handleSubmit}/>
+		<AuthForm
+			action="signup"
+			submitFunction={handleSubmit}
+		/>
 	)
 }
 export default SignUp;

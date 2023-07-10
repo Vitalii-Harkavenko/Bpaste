@@ -18,8 +18,7 @@ const LogIn = () => {
 
 	return (
 		<AuthForm 
-			title="Login to your account"
-			buttonText="Login"
+			action="login"
 			submitFunction={handleSubmit}
 		/>
 	)

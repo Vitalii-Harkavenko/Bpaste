@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link";
 import { useState} from "react";
 
 export interface UserObject {
@@ -6,9 +7,9 @@ export interface UserObject {
   password: string;
 }
 const AuthForm = ({ 
-	title, buttonText, submitFunction 
+	action, submitFunction 
 }: {
-	title: string, buttonText: string, submitFunction: ({name, password}: UserObject) => void
+	action: string, submitFunction: ({name, password}: UserObject) => void
 }) => {
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
@@ -18,7 +19,6 @@ const AuthForm = ({
 	}
 	return (
 		<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-			<p>{title}</p>
 			<input 
 				placeholder="Name"
 				type="text"
@@ -26,12 +26,29 @@ const AuthForm = ({
 				onChange={(e) => setName(e.target.value)}
 			></input>
 			<input 
-				placeholder="password"
+				placeholder="Password"
 				type="password"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 			></input>
-			<button type="submit" className="w-8 h-8 bg-white">{buttonText}</button>
+			{action === "signup"
+				? <button type="submit" className="filled-button">Signup</button>
+				: <button type="submit" className="empty-button">Login</button>
+			}
+			<p>
+			{action === "signup" ? (
+				<p className="flex gap-1">
+					Or you can
+					<Link href="/auth/login" className="text-violet-200">login</Link>
+				</p>
+			) : (
+				<p className="flex gap-1">
+					Or you can
+					<Link href="/auth/signup" className="text-violet-200">signup</Link>
+				</p>
+			)}
+			</p>
+			<Link href="/" className="text-violet-200">To homage</Link>
 		</form>
 	)
 }

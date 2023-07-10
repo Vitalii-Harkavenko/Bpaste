@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-button {
-	@apply py-2 px-4 border-solid border-white rounded-md border-[1px] transition-all duration-300 cursor-pointer
+.empty-button {
+	@apply py-2 px-4 border-solid border-white rounded-md border-[1px] transition-all duration-300 
+	cursor-pointer text-white bg-transparent hover:border-brand hover:text-brand
+}
+.filled-button {
+	@apply py-2 px-4 border-solid border-white rounded-md border-[1px] transition-all duration-300
+	cursor-pointer text-black bg-white hover:bg-brand hover:border-brand hover:text-white
 }

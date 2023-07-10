@@ -31,8 +31,8 @@ export default function Navbar () {
 			<ul className="flex items-center gap-4 ml-auto">
 				{ loggedIn === false &&
 					<>
-						<li><Link href='/auth/login' className="main-button text-white bg-transparent hover:border-brand hover:text-brand">Log in</Link></li>
-						<li><Link href='/auth/signup' className="main-button text-black bg-white hover:bg-brand hover:border-brand hover:text-white">Sign in</Link></li>
+						<li><Link href='/auth/login' className="login-button">Log in</Link></li>
+						<li><Link href='/auth/signup' className="signup-button">Sign in</Link></li>
 					</>
 				}
 				{ loggedIn === true &&

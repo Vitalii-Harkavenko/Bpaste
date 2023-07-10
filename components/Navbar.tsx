@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 export default function Navbar () {
 
 	const router = useRouter();
-	const [loggedIn] = useState<boolean>(checkUser());
+	const [loggedIn] = useState<boolean>(checkUser() || false);
 
 	const getFirstLetterOfName = () =>  {
 		const storedUser = returnUser();

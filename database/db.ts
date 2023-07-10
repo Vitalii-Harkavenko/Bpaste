@@ -10,6 +10,7 @@ export const searchQuery = async (query: string) => {
       }
     }
   });
+  await prisma.$disconnect();
   return result;
 };
 
@@ -25,6 +26,7 @@ export const createUser = async ({
         password,
       },
     });
+    await prisma.$disconnect();
     return {name: name, password: password};
   } catch (error) {
     console.error("An error occurred:", error);
@@ -49,6 +51,7 @@ export const loginUser = async ({
     if (user.password !== password) {
       return 'Password is wrong';
     }
+    await prisma.$disconnect();
     return {name: name, password: password};
   } catch (error) {
     console.error('Error during user login:', error);

@@ -1,5 +1,6 @@
 "use client"
 import { useState } from 'react';
+import Image from "next/image"
 
 export default function NewPost() {
   	const [title, setTitle] = useState('');
@@ -19,6 +20,12 @@ export default function NewPost() {
 			setTag('');
 		}
   	};
+	const handleDeleteTag = (tagToDelete: string) => {
+	setTags((prevTags) => {
+		const updatedTags = prevTags.filter((tag) => tag !== tagToDelete);
+		return updatedTags;
+	});
+	};
 
 	return (
 		<main className="bg-main grid grid-cols-[70%,30%] gap-8 px-16 py-8">
@@ -35,16 +42,17 @@ export default function NewPost() {
 					onChange={(e) => setSnippet(e.target.value)}
 				/>
 			</div>
-			<div>
-				<div className="flex gap-4 justify-center items-center mb-8">
+			<div className="flex flex-col items-center gap-8">
+				<div className="flex gap-4 items-center">
 					<input
 						className="w-32 h-6"
-						placeholder="Add a tag"
+						placeholder="Name a tag"
 						value={tag}
 						onChange={(e) => setTag(e.target.value)}
+						onKeyDown={(e) => { if (e.key === "Enter") handleAddTag() }}
 					/>
 					<button
-						className="filled-button"
+						className="empty-button"
 						onClick={handleAddTag}
 					>
 						Add Tag
@@ -52,14 +60,16 @@ export default function NewPost() {
 				</div>
 				<div className="flex gap-4 flex-wrap">
 					{tags.map((tag, index) => (
-						<div key={index} className="w-fit h-fit py-2 px-2 rounded-md text-black bg-violet-200">
+						<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
 							{tag}
+							<button className="relative w-4 h-4" onClick={() => handleDeleteTag(tag)}><Image src="/assets/delete.svg" alt="delete" fill/></button>
 						</div>
 					))}
 				</div>
 				{tagErrorMessage && (
           			<p className="text-red-400">7 tags, 20 characters each is the maximum</p>
         		)}
+				<button className="filled-button mt-auto w-1/2">Create the snippet</button>
 			</div>
 		</main>
 	)

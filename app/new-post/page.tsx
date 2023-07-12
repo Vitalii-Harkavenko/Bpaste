@@ -32,16 +32,17 @@ export default function NewPost() {
 
 	const handleCreatePost = async () => {
 		if (title === "" || content === "") return;
+		const user = returnUser();
 		const response = await fetch('/api/create-post', {
 			method: 'POST',
-			body: JSON.stringify({title, content, tags, returnUser}),
+			body: JSON.stringify({title, content, tags, user}),
 		});
 		const result = await response.json();
 		console.log(result);
 		setTitle('');
 		setContent('');
 		setTag('');
-		setTags([]);``
+		setTags([]);
 		navigateToBaseUrl(router);
 	}
 

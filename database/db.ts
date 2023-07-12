@@ -57,3 +57,32 @@ export const loginUser = async ({
     console.error('Error during user login:', error);
   }
 };
+export const createPost = async ({
+  title,
+  content,
+  tagArray,
+  userCredentials
+}: {
+  title: string,
+  content: string,
+  tagArray: string[],
+  userCredentials: { name: string, password: string }
+}) => {
+  const tags = tagArray.join(' ');
+  const checkOwner = await prisma.user.findUnique({
+    where: {
+      name: userCredentials.name
+    }
+  });
+  if (!checkOwner || checkOwner.password !== userCredentials.password) return;
+  await prisma.post.create({
+    data: {
+      title,
+      content,
+      tags,
+      owner: userCredentials.name
+    }
+  });
+  await prisma.$disconnect();
+  return "The post was created";
+} 

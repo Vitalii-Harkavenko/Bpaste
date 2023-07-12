@@ -1,13 +1,16 @@
 "use client"
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from "next/image"
+import { navigateToBaseUrl, returnUser } from "@/app/utils";
 
 export default function NewPost() {
   	const [title, setTitle] = useState('');
-  	const [snippet, setSnippet] = useState('');
+  	const [content, setContent] = useState('');
   	const [tag, setTag] = useState('');
   	const [tags, setTags] = useState<string[]>([]);
 	const [tagErrorMessage, setTagErrorMessage] = useState(false);
+	const router = useRouter();
 
     const handleAddTag = () => {
 		if (tags.length >= 7 || tag.trim().length > 20) {
@@ -27,6 +30,21 @@ export default function NewPost() {
 	});
 	};
 
+	const handleCreatePost = async () => {
+		if (title === "" || content === "") return;
+		const response = await fetch('/api/create-post', {
+			method: 'POST',
+			body: JSON.stringify({title, content, tags, returnUser}),
+		});
+		const result = await response.json();
+		console.log(result);
+		setTitle('');
+		setContent('');
+		setTag('');
+		setTags([]);``
+		navigateToBaseUrl(router);
+	}
+
 	return (
 		<main className="bg-main grid grid-cols-[70%,30%] gap-8 px-16 py-8">
 			<div className="flex flex-col gap-8">
@@ -38,8 +56,8 @@ export default function NewPost() {
 				/>
 				<input
 					placeholder="Snippet"
-					value={snippet}
-					onChange={(e) => setSnippet(e.target.value)}
+					value={content}
+					onChange={(e) => setContent(e.target.value)}
 				/>
 			</div>
 			<div className="flex flex-col items-center gap-8">
@@ -69,7 +87,7 @@ export default function NewPost() {
 				{tagErrorMessage && (
           			<p className="text-red-400">7 tags, 20 characters each is the maximum</p>
         		)}
-				<button className="filled-button mt-auto w-1/2">Create the snippet</button>
+				<button className="filled-button mt-auto w-1/2" onClick={handleCreatePost}>Create snippet</button>
 			</div>
 		</main>
 	)

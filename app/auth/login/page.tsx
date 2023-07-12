@@ -11,7 +11,7 @@ const LogIn = () => {
 			method: 'POST',
 			body: JSON.stringify({name, password}),
 		});
-		const user = await response.json()
+		const user = await response.json();
 		localStorage.setItem('user', JSON.stringify(user));
 		navigateToBaseUrl(router);
 	};

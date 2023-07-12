@@ -5,7 +5,14 @@ export const checkUser = () => {
 		return true;
 	};
 };
-export const returnUser = async () => {
+export const returnUser = () => {
+	if (typeof window !== "undefined") {
+		const storedUser = localStorage.getItem('user');
+		if (!storedUser) return false; 
+		return JSON.parse(storedUser);
+	};
+};
+export const checkAndReturnUser = async () => {
 	if (typeof window !== "undefined") {
 		const storedUser = localStorage.getItem('user') || "";
 		try {

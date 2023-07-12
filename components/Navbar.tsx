@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
-import { checkUser, returnUser } from "@/app/utils";
+import { checkUser, checkAndReturnUser } from "@/app/utils";
 import { useRouter } from 'next/navigation';
 
 export default function Navbar () {
@@ -12,7 +12,7 @@ export default function Navbar () {
 	const [loggedIn] = useState<boolean>(checkUser() || false);
 
 	const getFirstLetterOfName = async () =>  {
-		const storedUser = await returnUser();
+		const storedUser = await checkAndReturnUser();
 		if (!storedUser) {
 			localStorage.removeItem('user');
 			router.push('/auth/signup');

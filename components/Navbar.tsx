@@ -11,9 +11,9 @@ export default function Navbar () {
 	const router = useRouter();
 	const [loggedIn] = useState<boolean>(checkUser() || false);
 
-	const getFirstLetterOfName = () =>  {
-		const storedUser = returnUser();
-		if (typeof storedUser !== 'object' || storedUser === null || !('name' in storedUser)) {
+	const getFirstLetterOfName = async () =>  {
+		const storedUser = await returnUser();
+		if (!storedUser) {
 			localStorage.removeItem('user');
 			router.push('/auth/signup');
 			throw new Error('Invalid user object');
@@ -31,8 +31,8 @@ export default function Navbar () {
 			<ul className="flex items-center gap-4 ml-auto">
 				{ loggedIn === false &&
 					<>
-						<li><Link href='/auth/login' className="login-button">Log in</Link></li>
-						<li><Link href='/auth/signup' className="signup-button">Sign in</Link></li>
+						<li><Link href='/auth/login' className="empty-button">Log in</Link></li>
+						<li><Link href='/auth/signup' className="filled-button">Sign in</Link></li>
 					</>
 				}
 				{ loggedIn === true &&

@@ -3,7 +3,7 @@ const prisma = new PrismaClient()
 
 export const searchQuery = async (query: string) => {
   const keywords = query.split(' ');
-  const result = await prisma.users.findMany({
+  const result = await prisma.user.findMany({
     where: {
       name: {
         in: keywords
@@ -20,7 +20,7 @@ export const createUser = async ({
   name: string, password: string
 }) => {
   try {
-    await prisma.users.create({
+    await prisma.user.create({
       data: {
         name,
         password,
@@ -40,7 +40,7 @@ export const loginUser = async ({
   password: string;
 }) => {
   try {
-    const user = await prisma.users.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         name,
       },
@@ -52,7 +52,7 @@ export const loginUser = async ({
       return 'Password is wrong';
     }
     await prisma.$disconnect();
-    return {name: name, password: password};
+    return {name: user.password, password: user.password};
   } catch (error) {
     console.error('Error during user login:', error);
   }

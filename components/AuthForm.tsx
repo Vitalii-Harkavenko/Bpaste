@@ -24,31 +24,27 @@ const AuthForm = ({
 				type="text"
 				value={name}
 				onChange={(e) => setName(e.target.value)}
+				required
 			></input>
 			<input 
 				placeholder="Password"
 				type="password"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
+				required
 			></input>
 			{action === "signup"
 				? <button type="submit" className="filled-button">Signup</button>
 				: <button type="submit" className="empty-button">Login</button>
 			}
-			<p>
-			{action === "signup" ? (
-				<p className="flex gap-1">
-					Or you can
-					<Link href="/auth/login" className="text-violet-200">login</Link>
-				</p>
-			) : (
-				<p className="flex gap-1">
-					Or you can
-					<Link href="/auth/signup" className="text-violet-200">signup</Link>
-				</p>
-			)}
+			<p className="flex gap-1 justify-between mt-4">
+				{action === "signup"
+					? <Link href="/auth/login" className="text-violet-200">login</Link>
+					: <Link href="/auth/signup" className="text-violet-200">signup</Link>
+				}
+				<p>Or</p>
+				<Link href="/" className="text-violet-200">To homage</Link>
 			</p>
-			<Link href="/" className="text-violet-200">To homage</Link>
 		</form>
 	)
 }

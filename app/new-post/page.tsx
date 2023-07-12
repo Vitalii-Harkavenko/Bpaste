@@ -58,7 +58,7 @@ export default function NewPost() {
 						Add Tag
 					</button>
 				</div>
-				<div className="flex gap-4 flex-wrap">
+				<div className="flex gap-4 flex-wrap w-full">
 					{tags.map((tag, index) => (
 						<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
 							{tag}

@@ -29,6 +29,7 @@ export const createUser = async ({
     await prisma.$disconnect();
     return {name: name, password: password};
   } catch (error) {
+    await prisma.$disconnect();
     console.error("An error occurred:", error);
   }
 }
@@ -46,14 +47,17 @@ export const loginUser = async ({
       },
     });
     if (!user) {
+      await prisma.$disconnect();
       return 'Username is wrong';
     }
     if (user.password !== password) {
+      await prisma.$disconnect();
       return 'Password is wrong';
     }
     await prisma.$disconnect();
     return {name: user.password, password: user.password};
   } catch (error) {
+    await prisma.$disconnect();
     console.error('Error during user login:', error);
   }
 };
@@ -73,7 +77,10 @@ export const createPost = async ({
       name: user.name
     }
   });
-  if (!checkOwner || checkOwner.password !== user.password) return;
+  if (!checkOwner || checkOwner.password !== user.password) {
+    await prisma.$disconnect();
+    return;
+  };
   await prisma.post.create({
     data: {
       title,
@@ -84,4 +91,19 @@ export const createPost = async ({
   });
   await prisma.$disconnect();
   return "The post was created";
-} 
+}
+export const findPost = async ({
+  post, user
+}: {
+  post: string,
+  user: string
+}) => {
+  const checkOwner = await prisma.post.findMany({
+    where: {
+      title: post,
+      owner: user
+    }
+  });
+  await prisma.$disconnect();
+  return checkOwner;
+};

@@ -38,11 +38,6 @@ export default function NewPost() {
 			body: JSON.stringify({title, content, tags, user}),
 		});
 		const result = await response.json();
-		console.log(result);
-		setTitle('');
-		setContent('');
-		setTag('');
-		setTags([]);
 		navigateToBaseUrl(router);
 	}
 

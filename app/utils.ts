@@ -8,7 +8,7 @@ export const checkUser = () => {
 export const returnUser = () => {
 	if (typeof window !== "undefined") {
 		const storedUser = localStorage.getItem('user');
-		if (!storedUser) return false; 
+		if (!storedUser) return false;
 		return JSON.parse(storedUser);
 	};
 };

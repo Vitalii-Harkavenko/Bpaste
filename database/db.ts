@@ -60,27 +60,26 @@ export const loginUser = async ({
 export const createPost = async ({
   title,
   content,
-  tagArray,
-  userCredentials
+  tags,
+  user
 }: {
   title: string,
   content: string,
-  tagArray: string[],
-  userCredentials: { name: string, password: string }
+  tags: string[],
+  user: { name: string, password: string }
 }) => {
-  const tags = tagArray.join(' ');
   const checkOwner = await prisma.user.findUnique({
     where: {
-      name: userCredentials.name
+      name: user.name
     }
   });
-  if (!checkOwner || checkOwner.password !== userCredentials.password) return;
+  if (!checkOwner || checkOwner.password !== user.password) return;
   await prisma.post.create({
     data: {
       title,
       content,
-      tags,
-      owner: userCredentials.name
+      tags: tags.join(', '),
+      owner: user.name
     }
   });
   await prisma.$disconnect();

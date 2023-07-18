@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
 	const result = () => {
 		if (Array.isArray(response) && response.length === 0)
 		return "Nothing found";
-		else return JSON.stringify(response);
+		else return response;
 	}
-	return new Response(result())
+	return new Response(JSON.stringify({result: result()}))
 }

@@ -13,7 +13,7 @@ export default function Results() {
 				method: "GET"
 			});
 			const data = await response.json();
-			setResponseData(data);
+			setResponseData(data.result);
 		} catch(err) {
 			console.log("Error fetching search results:", err)
 		}
@@ -21,15 +21,22 @@ export default function Results() {
 
 	return (
 		<main>
-			{ typeof responseData === "string"
-			? <div>
-				<p>{responseData}</p>
-			</div>
-			: responseData.map(item => (
-				<div key={item.id} className="w-full p-8 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
-					<p>{item.title}, {item.content}</p>
+			{ typeof responseData === "string" ?
+				<div className="items-center w-full h-full flex justify-center">
+					<h3>{responseData}</h3>
 				</div>
-			))}
+			: 
+				responseData.map(item => (
+					<div key={item.id} className="w-full grid grid-cols-3 items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
+						<div>
+							<h3>{item.title}</h3>
+							<p>{item.content}</p>
+						</div>
+						<p>{item.date.split('T')[0].replace(/-/g, '.')}</p>
+						<p>{item.likes}</p>
+					</div>
+				))
+			}
 		</main>
 	)
 }

@@ -13,11 +13,7 @@ export default function Results() {
 				method: "GET"
 			});
 			const data = await response.json();
-			let parsedData;
-			if (data.result == undefined) {
-				parsedData = data
-			} else { parsedData = JSON.parse(data.result) };
-      		setResponseData(parsedData);
+			setResponseData(data);
 		} catch(err) {
 			console.log("Error fetching search results:", err)
 		}
@@ -27,11 +23,11 @@ export default function Results() {
 		<main>
 			{ typeof responseData === "string"
 			? <div>
-					<p>{responseData}</p>
-				</div>
+				<p>{responseData}</p>
+			</div>
 			: responseData.map(item => (
 				<div key={item.id} className="w-full p-8 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
-					<p>{item.name}</p>
+					<p>{item.title}, {item.content}</p>
 				</div>
 			))}
 		</main>

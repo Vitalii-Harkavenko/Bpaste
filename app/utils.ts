@@ -1,9 +1,8 @@
 export const checkUser = () => {
-	if (typeof window !== "undefined") {
-		const storedUser = localStorage.getItem('user');
-		if (!storedUser) return false; 
-		return true;
-	};
+	if (typeof window === "undefined") {return false};
+	const storedUser = localStorage.getItem('user');
+	if (!storedUser) return false;
+	return true;
 };
 export const returnUser = () => {
 	if (typeof window !== "undefined") {
@@ -12,21 +11,10 @@ export const returnUser = () => {
 		return JSON.parse(storedUser);
 	};
 };
-export const checkAndReturnUser = async () => {
-	if (typeof window !== "undefined") {
-		const storedUser = localStorage.getItem('user') || "";
-		try {
-			const response = await fetch('/api/login', {
-				method: 'POST',
-				body: storedUser,
-			});
-			const user = await response.json();
-			if (typeof user !== 'object') return false;
-			return user;
-		} catch (error) {
-			console.error("An error occurred checking user:", error)
-		}
-	};
+export const checkAndReturnUser = () => {
+	const storedUser = localStorage.getItem('user');
+	if (!storedUser) return false;
+	return JSON.parse(storedUser);
 };
 export const navigateToBaseUrl = (router: any) => {
 	if (checkUser()) {

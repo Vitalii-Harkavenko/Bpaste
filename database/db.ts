@@ -3,9 +3,9 @@ const prisma = new PrismaClient()
 
 export const searchQuery = async (query: string) => {
   const keywords = query.split(' ');
-  const result = await prisma.user.findMany({
+  const result = await prisma.post.findMany({
     where: {
-      name: {
+      title: {
         in: keywords
       }
     }

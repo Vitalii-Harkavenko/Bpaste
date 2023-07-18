@@ -29,7 +29,10 @@ export default function Results() {
 				responseData.map(item => (
 					<div key={item.id} className="w-full grid grid-cols-3 items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
 						<div>
-							<h3>{item.title}</h3>
+							<div className="flex gap-4 mb-4">
+								<div className="rounded-full bg-slate-400 w-10 h-10 flex items-center justify-center text-black">{item.owner[0]}</div>
+								<h3>{item.title}</h3>
+							</div>
 							<p>{item.content}</p>
 						</div>
 						<p>{item.date.split('T')[0].replace(/-/g, '.')}</p>

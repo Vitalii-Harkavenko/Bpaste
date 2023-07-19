@@ -10,6 +10,7 @@ export default function NewPost() {
   	const [tag, setTag] = useState('');
   	const [tags, setTags] = useState<string[]>([]);
 	const [tagErrorMessage, setTagErrorMessage] = useState(false);
+	const [postErrorMessage, setPostErrorMessage] = useState(false);
 	const router = useRouter();
 
     const handleAddTag = () => {
@@ -31,15 +32,27 @@ export default function NewPost() {
 	};
 
 	const handleCreatePost = async () => {
-		if (title === "" || content === "" || content.length < 50) return;
+		if (title === "" || content === "" || content.length < 50) {
+			setPostErrorMessage(true);
+			const timeout = setTimeout(() => {setPostErrorMessage(false)}, 3000);
+      		return () => clearTimeout(timeout);
+		};
 		const user = returnUser();
-		const response = await fetch('/api/create-post', {
+		const existingPost = await fetch(`/api/post?user=${user.name}&post=${title}`, {
+			method: "GET"
+		});
+		const retreivedPost = await existingPost.json();
+		if (retreivedPost) {
+			setPostErrorMessage(true);
+			const timeout = setTimeout(() => {setPostErrorMessage(false)}, 3000);
+      		return () => clearTimeout(timeout);
+		};
+		await fetch('/api/create-post', {
 			method: 'POST',
 			body: JSON.stringify({title, content, tags, user}),
 		});
-		const result = await response.json();
 		navigateToBaseUrl(router);
-	}
+	};
 
 	return (
 		<main className="bg-main grid grid-cols-[70%,30%] gap-8 px-16 py-8 overflow-hidden">
@@ -50,6 +63,7 @@ export default function NewPost() {
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
 				/>
+				{postErrorMessage && <p className="text-red-400">The title/content is empty or you already have a post with that name</p>}
 				<textarea
 					placeholder="Snippet"
 					value={content}

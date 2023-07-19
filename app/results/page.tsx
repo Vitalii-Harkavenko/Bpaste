@@ -1,8 +1,11 @@
 "use client"
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useState, useEffect} from "react";
+import { returnUser } from "../utils";
 
 export default function Results() { 
+
+	const rouser = useRouter();
 	const [responseData, setResponseData] = useState<any[]>([]);
 	const query = useSearchParams().get('search') || '';
 	useEffect(() => { getResponse()}, [query]);
@@ -19,6 +22,10 @@ export default function Results() {
 		}
 	};
 
+	const handleRedirect = (title: string) => {
+		rouser.push(`/post?user=${returnUser().name}&post=${title}`)
+	}
+
 	return (
 		<main>
 			{ typeof responseData === "string" ?
@@ -27,7 +34,7 @@ export default function Results() {
 				</div>
 			: 
 				responseData.map(item => (
-					<div key={item.id} className="w-full grid grid-cols-3 items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
+					<div onClick={() => handleRedirect(item.title)} key={item.id} className="w-full grid grid-cols-3 items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
 						<div>
 							<div className="flex gap-4 mb-4">
 								<div className="rounded-full bg-slate-400 w-10 h-10 flex items-center justify-center text-black">{item.owner[0]}</div>

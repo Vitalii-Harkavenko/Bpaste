@@ -6,10 +6,5 @@ export async function GET(req: NextRequest) {
 	const post = searchParams.get('post') || "";
 	const user = searchParams.get('user') || "";
 	const response = await findPost({post, user});
-	const result = () => {
-		return response.length === 0
-		? "Nothing found"
-		: JSON.stringify(response);
-	};
-	return new Response(result())
+	return new Response(JSON.stringify(response))
 }

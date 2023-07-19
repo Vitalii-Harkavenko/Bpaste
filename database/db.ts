@@ -5,9 +5,11 @@ export const searchQuery = async (query: string) => {
   const keywords = query.split(' ');
   const result = await prisma.post.findMany({
     where: {
-      title: {
-        in: keywords
-      }
+      OR: keywords.map(keyword => ({
+        title: {
+          contains: keyword
+        }
+      }))
     }
   });
   await prisma.$disconnect();
@@ -98,12 +100,15 @@ export const findPost = async ({
   post: string,
   user: string
 }) => {
-  const checkOwner = await prisma.post.findMany({
+  const retreivedPost = await prisma.post.findFirst({
     where: {
       title: post,
       owner: user
     }
   });
   await prisma.$disconnect();
-  return checkOwner;
+  if (!retreivedPost) return retreivedPost;
+  const {title, content, tags, date, likes, owner} = retreivedPost;
+  const processedTags = tags.split(", ");
+  return {title, content, tags: processedTags, date, likes, owner};
 };

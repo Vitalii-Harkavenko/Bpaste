@@ -11,6 +11,5 @@ export async function GET(req: NextRequest) {
 		? "Nothing found"
 		: JSON.stringify(response);
 	};
-	console.log(result())
 	return new Response(result())
 }

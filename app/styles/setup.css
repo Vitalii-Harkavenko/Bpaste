@@ -36,10 +36,18 @@ h3,
 
 p,
 pre,
-input {
+input,
+textarea {
 	font-size: 1rem;
 	@apply bg-transparent outline-none text-text-color
 }
 main {
 	@apply text-text-color w-full h-full
+}
+textarea::-webkit-scrollbar {
+	width: 8px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+	background-color: rgb(163, 163, 163);
 }

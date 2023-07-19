@@ -31,7 +31,7 @@ export default function NewPost() {
 	};
 
 	const handleCreatePost = async () => {
-		if (title === "" || content === "") return;
+		if (title === "" || content === "" || content.length < 50) return;
 		const user = returnUser();
 		const response = await fetch('/api/create-post', {
 			method: 'POST',
@@ -42,7 +42,7 @@ export default function NewPost() {
 	}
 
 	return (
-		<main className="bg-main grid grid-cols-[70%,30%] gap-8 px-16 py-8">
+		<main className="bg-main grid grid-cols-[70%,30%] gap-8 px-16 py-8 overflow-hidden">
 			<div className="flex flex-col gap-8">
 				<input
 					className="h3"
@@ -50,10 +50,11 @@ export default function NewPost() {
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
 				/>
-				<input
+				<textarea
 					placeholder="Snippet"
 					value={content}
 					onChange={(e) => setContent(e.target.value)}
+					className="w-full h-full"
 				/>
 			</div>
 			<div className="flex flex-col items-center gap-8">

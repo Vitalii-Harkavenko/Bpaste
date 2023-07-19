@@ -33,7 +33,7 @@ export default function Results() {
 								<div className="rounded-full bg-slate-400 w-10 h-10 flex items-center justify-center text-black">{item.owner[0]}</div>
 								<h3>{item.title}</h3>
 							</div>
-							<p>{item.content}</p>
+							<p>{item.content.slice(0, 30)}...</p>
 						</div>
 						<p>{item.date.split('T')[0].replace(/-/g, '.')}</p>
 						<p>{item.likes}</p>

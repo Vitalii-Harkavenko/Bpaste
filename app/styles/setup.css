@@ -44,10 +44,13 @@ textarea {
 main {
 	@apply text-text-color w-full h-full
 }
-textarea::-webkit-scrollbar {
+main::-webkit-scrollbar {
 	width: 8px;
+	background-color: rgb(13 15 21);
 }
-
+main::-webkit-scrollbar-thumb {
+	background-color: rgb(74, 69, 79);
+}
 textarea::-webkit-scrollbar-thumb {
 	background-color: rgb(163, 163, 163);
 }

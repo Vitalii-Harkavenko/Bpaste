@@ -27,7 +27,7 @@ export default function Results() {
 	}
 
 	return (
-		<main>
+		<main className="overflow-y-scroll">
 			{ typeof responseData === "string" ?
 				<div className="items-center w-full h-full flex justify-center">
 					<h3>{responseData}</h3>

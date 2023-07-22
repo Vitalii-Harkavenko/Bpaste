@@ -22,8 +22,8 @@ export default function Results() {
 		}
 	};
 
-	const handleRedirect = (title: string) => {
-		rouser.push(`/post?user=${returnUser().name}&post=${title}`)
+	const handleRedirect = (owner: string, title: string) => {
+		rouser.push(`/post?user=${owner}&post=${title}`)
 	}
 
 	return (
@@ -34,7 +34,7 @@ export default function Results() {
 				</div>
 			: 
 				responseData.map(item => (
-					<div onClick={() => handleRedirect(item.title)} key={item.id} className="w-full grid grid-cols-3 items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
+					<div onClick={() => handleRedirect(item.owner, item.title)} key={item.id} className="w-full grid grid-cols-3 items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
 						<div>
 							<div className="flex gap-4 mb-4">
 								<div className="rounded-full bg-slate-400 w-10 h-10 flex items-center justify-center text-black">{item.owner[0]}</div>

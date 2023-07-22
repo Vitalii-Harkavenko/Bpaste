@@ -5,11 +5,18 @@ export const searchQuery = async (query: string) => {
   const keywords = query.split(' ');
   const result = await prisma.post.findMany({
     where: {
-      OR: keywords.map(keyword => ({
-        title: {
-          contains: keyword
-        }
-      }))
+      OR: [
+        ...keywords.map(keyword => ({
+          title: {
+            contains: keyword
+          }
+        })),
+        ...keywords.map(keyword => ({
+          tags: {
+            contains: keyword
+          }
+        }))
+      ]
     }
   });
   await prisma.$disconnect();
@@ -22,6 +29,15 @@ export const createUser = async ({
   name: string, password: string
 }) => {
   try {
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        name,
+      },
+    });
+    if (existingUser) {
+      await prisma.$disconnect();
+      return "This username has already been taken";
+    };
     await prisma.user.create({
       data: {
         name,
@@ -57,7 +73,7 @@ export const loginUser = async ({
       return 'Password is wrong';
     }
     await prisma.$disconnect();
-    return {name: user.password, password: user.password};
+    return {name: user.name, password: user.password};
   } catch (error) {
     await prisma.$disconnect();
     console.error('Error during user login:', error);

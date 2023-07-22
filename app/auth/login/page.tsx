@@ -2,25 +2,43 @@
 import { navigateToBaseUrl } from "@/app/utils";
 import { useRouter } from 'next/navigation';
 import AuthForm, { UserObject } from "@/components/AuthForm";
+import { useState } from "react";
 
 const LogIn = () => {
-	
+	const [message, setMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState(false);
+
 	const router = useRouter();
 	const handleSubmit = async ({name, password}: UserObject) => {
 		const response = await fetch('/api/login', {
 			method: 'POST',
 			body: JSON.stringify({name, password}),
 		});
-		const user = await response.json();
-		localStorage.setItem('user', JSON.stringify(user));
+		const result = await response.json();
+		if (typeof result !== "object") {
+			setErrorMessage(true);
+			setMessage(result);
+
+			setTimeout(() => {
+				setErrorMessage(false);
+				setMessage('');
+			}, 3000);
+
+			return;
+		};
+		localStorage.setItem('user', JSON.stringify(result));
 		navigateToBaseUrl(router);
 	};
 
 	return (
-		<AuthForm 
-			action="login"
-			submitFunction={handleSubmit}
-		/>
+		<div className="relative">
+			{errorMessage && ( <p className="text-red-400 absolute top-0 left-1/2 -translate-y-[150%] -translate-x-1/2 whitespace-nowrap">{message}</p> )}
+			<AuthForm 
+				action="login"
+				submitFunction={handleSubmit}
+			/>
+		</div>
+		
 	)
 }
 export default LogIn;

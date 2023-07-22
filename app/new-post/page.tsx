@@ -32,7 +32,7 @@ export default function NewPost() {
 	};
 
 	const handleCreatePost = async () => {
-		if (title === "" || content === "" || content.length < 50) {
+		if (title === "" || content === "" || content.length < 50 || content.length > 7000) {
 			setPostErrorMessage(true);
 			const timeout = setTimeout(() => {setPostErrorMessage(false)}, 3000);
       		return () => clearTimeout(timeout);
@@ -55,51 +55,56 @@ export default function NewPost() {
 	};
 
 	return (
-		<main className="bg-main grid grid-cols-[70%,30%] gap-8 px-16 py-8 overflow-hidden">
-			<div className="flex flex-col gap-8">
-				<input
-					className="h3"
-					placeholder="Title"
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-				/>
-				{postErrorMessage && <p className="text-red-400">The title/content is empty or you already have a post with that name</p>}
-				<textarea
-					placeholder="Snippet"
-					value={content}
-					onChange={(e) => setContent(e.target.value)}
-					className="w-full h-full"
-				/>
-			</div>
-			<div className="flex flex-col items-center gap-8">
-				<div className="flex gap-4 items-center">
+		<>
+			<main className="grid grid-cols-[60%,40%] gap-8 pl-32 py-8 overflow-hidden">
+				<div className="flex flex-col gap-8">
 					<input
-						className="w-32 h-6"
-						placeholder="Name a tag"
-						value={tag}
-						onChange={(e) => setTag(e.target.value)}
-						onKeyDown={(e) => { if (e.key === "Enter") handleAddTag() }}
+						className="h3"
+						placeholder="Title"
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
 					/>
-					<button
-						className="empty-button"
-						onClick={handleAddTag}
-					>
-						Add Tag
-					</button>
+					{postErrorMessage && <p className="text-red-400">The title/content is empty or you already have a post with that name</p>}
+					<textarea
+						placeholder="Snippet"
+						value={content}
+						onChange={(e) => setContent(e.target.value)}
+						className="w-full h-full resize-none"
+					/>
 				</div>
-				<div className="flex gap-4 flex-wrap w-full">
-					{tags.map((tag, index) => (
-						<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
-							{tag}
-							<button className="relative w-4 h-4" onClick={() => handleDeleteTag(tag)}><Image src="/assets/delete.svg" alt="delete" fill/></button>
+				<div className="flex flex-col gap-16">
+					<div className="post-info">
+						<div className="flex gap-4 items-center justify-center">
+							<input
+								className="w-32 h-6"
+								placeholder="Name a tag"
+								value={tag}
+								onChange={(e) => setTag(e.target.value)}
+								onKeyDown={(e) => { if (e.key === "Enter") handleAddTag() }}
+							/>
+							<button
+								className="empty-button"
+								onClick={handleAddTag}
+							>
+								Add Tag
+							</button>
 						</div>
-					))}
+						<div className="flex gap-4 flex-wrap w-full">
+							{tags.map((tag, index) => (
+								<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
+									{tag}
+									<button className="relative w-4 h-4" onClick={() => handleDeleteTag(tag)}><Image src="/assets/delete.svg" alt="delete" fill/></button>
+								</div>
+							))}
+						</div>
+						{tagErrorMessage && (
+							<p className="text-red-400">7 tags, 20 characters each is the maximum</p>
+						)}
+					</div>
+					<button className="filled-button mx-auto w-1/2" onClick={handleCreatePost}>Create snippet</button>
 				</div>
-				{tagErrorMessage && (
-          			<p className="text-red-400">7 tags, 20 characters each is the maximum</p>
-        		)}
-				<button className="filled-button mt-auto w-1/2" onClick={handleCreatePost}>Create snippet</button>
-			</div>
-		</main>
+			</main>
+			<div className="gradient"></div>
+		</>
 	)
 }

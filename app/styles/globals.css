@@ -10,3 +10,9 @@
 	@apply py-2 px-4 border-solid border-white rounded-md border-[1px] transition-all duration-300
 	cursor-pointer text-black bg-white hover:bg-brand hover:border-brand hover:text-white
 }
+.gradient {
+	@apply absolute w-screen h-screen bg-gradient-to-br from-[#150f2a] to-[#0c0a12] z-10
+}
+.post-info {
+	@apply flex flex-col gap-4 py-8 bg-[#171725] rounded-md pl-16 pr-32 w-full h-full
+};

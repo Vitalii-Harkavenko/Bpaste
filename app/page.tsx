@@ -1,18 +1,18 @@
 import Image from "next/image"
 import CardHero from "../components/CardHero"
+import Navbar from "@/components/Navbar"
 
 export default async function Home() {
 
   return (
     <>
       <div className="relative w-full h-full overflow-hidden">
-        <div className="w-screen h-screen absolute">
-          <Image src="/assets/hero.png" alt="coding boilerplates image" fill />
-        </div>
-        <main className="relative overflow-hidden flex flex-col gap-[5vh] px-8 z-10 bg-gradient-to-t from-black via-[rgba(2,0,89,0.5)] to-transparent">
+        <Image src="/assets/hero.png" alt="coding boilerplates image" className="absolute" fill />
+        <main className="relative overflow-hidden flex flex-col z-10 bg-gradient-to-t from-black via-[rgba(2,0,89,0.5)] to-transparent">
+          <Navbar />
           <h1 className="
             bg-gradient-to-br from-pink-300 to-pink-50 bg-clip-text text-transparent
-            w-1/2 text-center mx-auto mt-[auto]
+            w-1/2 text-center mx-auto my-auto
           ">
             Store your reusable stuff and don't write it twice
           </h1>

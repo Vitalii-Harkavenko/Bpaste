@@ -28,18 +28,30 @@ export default function NewPost() {
 		};
 	};
 	return (
-		<main className="bg-main grid grid-cols-[70%,30%] gap-8 px-16 py-8">
-			<div className="flex flex-col gap-8">
-				<h3>{postData.title}</h3>
-				<p>{postData.content}</p>
-			</div>
-			<div className="flex gap-4 flex-wrap">
-				{postData.tags && postData.tags[0] !== '' && postData.tags.map((tag, index) => (
-					<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
-						{tag}
+		<>
+			<main className="grid grid-cols-[60%,40%] gap-8 pl-32 py-8">
+				<div className="flex flex-col gap-8">
+					<h3>{postData.title}</h3>
+					<pre>{postData.content}{postData.content}</pre>
+				</div>
+				<div className="post-info">
+					<div className="flex gap-4">
+						<p className="py-2">Tags</p>
+						<div className="flex gap-4 flex-wrap">
+							{postData.tags && postData.tags[0] !== '' && postData.tags.map((tag, index) => (
+								<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
+									{tag}
+								</div>
+							))}
+						</div>
 					</div>
-				))}
-			</div>
-		</main>
+					<div className="flex gap-4">
+						<p>Likes</p>
+						<p>{postData.likes}</p>
+					</div>
+				</div>
+			</main>
+			<div className="gradient"></div>
+		</>
 	)
 }

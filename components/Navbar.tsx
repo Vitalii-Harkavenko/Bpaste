@@ -26,7 +26,7 @@ export default function Navbar () {
 	}, []);
 
   	return (
-		<nav className="sticky top-0 left-0 w-screen h-20 py-5 px-8 backdrop-blur-xl backdrop-opacity-50 bg-main grid grid-cols-[1fr,50vw,1fr] gap-8">
+		<nav className="sticky top-0 left-0 w-screen h-20 py-5 px-8 backdrop-blur-xl backdrop-brightness-[.85] grid grid-cols-[1fr,50vw,1fr] gap-8 z-20">
 			<div className="w-10 h-10 relative">
 				<Image src="/assets/logo.png" alt="logo" fill/>
 			</div>

@@ -13,7 +13,7 @@ export default function SearchBar() {
 	};
 
 	return (
-		<div className="w-full h-full bg-[#1D2C2F] text-text-color rounded-md grid grid-cols-[1fr,2rem] items-center gap-12 px-6">
+		<div className="w-full h-full bg-[#1d1e2f] text-text-color rounded-md grid grid-cols-[1fr,2rem] items-center gap-12 px-6">
 			<input 
 				className="bg-transparent outline-none"
 				placeholder="Search for anything"
@@ -23,7 +23,7 @@ export default function SearchBar() {
 				onKeyDown={(e) => { if (e.key === "Enter") handleSubmit() }}
 			/>
 			<button>
-				<div className="relative w-8 h-8">
+				<div className="relative w-6 h-6">
 					<Image src="/assets/options.svg" fill alt="optionts"></Image>
 				</div>
 			</button>

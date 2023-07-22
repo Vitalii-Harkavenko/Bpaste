@@ -9,6 +9,7 @@ interface PostData {
 	tags: string[];
 	date: string;
 	likes: number;
+	owner: string
 }[];
 
 export default function NewPost() {
@@ -33,9 +34,12 @@ export default function NewPost() {
 			<main className="grid grid-cols-[60%,40%] gap-8 pl-32 py-8">
 				{ postData &&
 					<>
-						<div className="flex flex-col gap-8">
-							<h3>{postData.title}</h3>
-							<pre>{postData.content}</pre>
+						<div>
+							<h2 className="mb-8">{postData.owner}</h2>
+							<div className="flex flex-col gap-8">
+								<h3>{postData.title}</h3>
+								<pre>{postData.content}</pre>
+							</div>
 						</div>
 						<div className="post-info">
 							<div className="flex justify-between">

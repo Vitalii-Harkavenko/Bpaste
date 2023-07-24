@@ -13,7 +13,7 @@ export default function SearchBar() {
 	};
 
 	return (
-		<div className="w-full h-full bg-[#1d1e2f] text-text-color rounded-md grid grid-cols-[1fr,2rem] items-center gap-12 px-6">
+		<div className="w-full h-full bg-[#1d1e2a] text-text-color rounded-md grid grid-cols-[1fr,2rem] items-center gap-12 px-6">
 			<input 
 				className="bg-transparent outline-none"
 				placeholder="Search for anything"

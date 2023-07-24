@@ -11,8 +11,8 @@
 	cursor-pointer text-black bg-white hover:bg-brand hover:border-brand hover:text-white
 }
 .gradient {
-	@apply absolute w-screen h-screen bg-gradient-to-br from-[#150f2a] to-[#0c0a12] z-10
+	@apply absolute w-screen h-screen bg-gradient-to-br from-[#1a152c] to-[#0c0a13] z-10
 }
 .post-info {
-	@apply flex flex-col gap-8 py-8 bg-[#171725] rounded-md pl-16 pr-32 w-full h-full
+	@apply flex flex-col gap-8 py-8 pl-16 pr-32 w-full h-full;
 };

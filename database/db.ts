@@ -128,3 +128,10 @@ export const findPost = async ({
   const processedTags = tags.split(", ");
   return {title, content, tags: processedTags, date, likes, owner};
 };
+export const likePost = async ({
+  user: name, post: {owner: owner, post: title}
+}: {
+  user: string, post: { owner: string, post: string }
+}) => {
+  const liked = await prisma.post
+}

@@ -25,4 +25,5 @@ model post {
   date    DateTime @default(now())
   likes   Int    @default(0)
   owner   String
+  liked_by String?
 }

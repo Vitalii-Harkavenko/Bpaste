@@ -1,6 +1,6 @@
 "use client"
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { returnUser } from "../utils";
 
@@ -10,38 +10,43 @@ interface PostData {
 	tags: string[];
 	date: string;
 	likes: number;
-	owner: string
+	owner: string;
 };
 
 export default function NewPost() {
 
 	const [postData, setPostData] = useState<PostData | undefined>(undefined);
+	const [liked, setLiked] = useState(false);
+	const likeBtn = useRef(null);
 	const user = useSearchParams().get('user') || '';
 	const post = useSearchParams().get('post') || '';
 	useEffect(() => { getResponse()}, [user, post]);
 
 	const getResponse = async () => {
 		try {
-			const response = await fetch(`/api/post?user=${user}&post=${post.replace(/%20|\+/g, ' ')}`, {
-				method: "GET"
-			});
+			const response = await fetch(`/api/post?user=${user}&post=${post.replace(/%20|\+/g, ' ')}`);
 			setPostData(await response.json());
+			const likesResponse = await fetch(`/api/likedpost?owner=${user}&title=${post.replace(/%20|\+/g, ' ')}&user=${returnUser().name}`);
+			setLiked(await likesResponse.json());
 		} catch(err) {
-			console.log("Error fetching search results:", err)
+			console.log("Error fetching search results:", err);
 		};
 	};
-
+	
 	const handleLike = async () => {
     	try {
-    		const user = await returnUser();
+    		const user = returnUser();
+			if (!user) return;
     		const response = await fetch(`/api/likepost`, {
-    	    	body: JSON.stringify({user: user.name, post: {owner: postData!.owner, post: postData!.title}}),
+				method: "POST",
+    	    	body: JSON.stringify({user: user.name, post: {owner: postData!.owner, title: postData!.title}}),
     	  	});
     	    const updatedLikes = await response.json();
      		setPostData(prevData => ({
         		...prevData!,
-        		likes: updatedLikes,
+        		likes: updatedLikes.likes,
       		}));
+			setLiked(updatedLikes.liked);
         } catch (err) {
     		console.log("Error liking the post:", err);
     	}
@@ -61,7 +66,7 @@ export default function NewPost() {
 								<h3>{postData.owner}</h3>
 								<div className="flex gap-4 items-center">
 									<p>{postData.date.split('T')[0].replace(/-/g, '.')}</p>
-									<button onClick={handleLike} className="flex gap-2 rounded-md w-fit p-2 hover:bg-[#2e2932]">
+									<button ref={likeBtn} onClick={handleLike} className="flex gap-2 rounded-md w-fit p-2 hover:bg-[#2e2932]" style={{backgroundColor: `${liked ? "#2e2932": ""}`}}>
 										<div className="relative h-6 w-6">
 											<Image src="assets/like.svg" alt="like" fill />
 										</div>

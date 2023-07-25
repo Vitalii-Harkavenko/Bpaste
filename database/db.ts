@@ -123,15 +123,78 @@ export const findPost = async ({
     }
   });
   await prisma.$disconnect();
-  if (!retreivedPost) return retreivedPost;
+  if (!retreivedPost) return null;
   const {title, content, tags, date, likes, owner} = retreivedPost;
   const processedTags = tags.split(", ");
   return {title, content, tags: processedTags, date, likes, owner};
 };
+
 export const likePost = async ({
-  user: name, post: {owner: owner, post: title}
+  user: name,
+  post: { owner, title: title }
 }: {
-  user: string, post: { owner: string, post: string }
+  user: string;
+  post: { owner: string; title: string };
 }) => {
-  const liked = await prisma.post
-}
+  try {
+    const post = await prisma.post.findFirst({
+      where: { title: title, owner: owner }
+    });
+
+    if (!post) {
+      await prisma.$disconnect();
+      throw new Error('Post not found');
+    }
+    const likedBy = post.liked_by ? post.liked_by.split(',').map((username) => username.trim()) : [];
+    const likes = post.likes || 0;
+
+    if (likedBy.includes(name)) {
+      const updatedLikes = likes - 1;
+      const updatedLikedBy = likedBy.filter((username) => username !== name).join(', ');
+
+      await prisma.post.update({
+        where: { id: post.id },
+        data: { likes: updatedLikes, liked_by: updatedLikedBy }
+      });
+      await prisma.$disconnect();
+      return {likes: updatedLikes, liked: false};
+    } else {
+      const updatedLikes = likes + 1;
+      const updatedLikedBy = [...likedBy, name].join(', ');
+
+      await prisma.post.update({
+        where: { id: post.id },
+        data: { likes: updatedLikes, liked_by: updatedLikedBy }
+      });
+      await prisma.$disconnect();
+      return {likes: updatedLikes, liked: true};
+    }
+  } catch (error) {
+    console.error('Error while processing likePost:', error);
+  }
+};
+export const likedPost = async ({
+  owner, title, user 
+}: {
+  owner: string; title: string; user: string;
+}) => {
+  try {
+    const post = await prisma.post.findFirst({
+      where: { title: title, owner: owner }
+    });
+    if (!post) {
+      await prisma.$disconnect();
+      throw new Error('Post not found');
+    }
+    const likedBy = post.liked_by ? post.liked_by.split(',').map((username) => username.trim()) : [];
+    if (likedBy.includes(user)) {
+      await prisma.$disconnect();
+      return true;
+    } else {
+      await prisma.$disconnect();
+      return false;
+    }
+  } catch (error) {
+    console.error('Error while processing likePost:', error);
+  }
+};

@@ -9,6 +9,7 @@ export default function SearchBar() {
 	const router = useRouter();
 	
 	const handleSubmit = () => {
+		if (searchValue === "") return;
 		router.push(`/results?search=${searchValue}`)
 	};
 

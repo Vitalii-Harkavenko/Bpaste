@@ -34,7 +34,7 @@ export default function Navbar () {
 			<ul className="flex items-center gap-4 ml-auto">
 				{loggedIn ?
   					<>
-						<li><p>Posts</p></li>
+						<li><Link href='/posts'><p>Posts</p></Link></li>
 						<li><Link href='/new-post'><p>New post</p></Link></li>
 						<li><div className="rounded-full bg-slate-400 w-10 h-10 flex items-center justify-center">{getFirstLetterOfName()}</div></li>
 					</>

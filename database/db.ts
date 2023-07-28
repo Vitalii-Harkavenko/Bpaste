@@ -1,24 +1,52 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-export const searchQuery = async (query: string) => {
-  const keywords = query.split(' ');
+export const searchQuery = async ({
+  query, owner, tags
+}: {
+  query: string, owner: string, tags: string
+}) => {
+  const keywords = query !== "" ? query.split(' ') : [];
+  const tagsKeywords = tags !== "" ? tags.split(', ') : [];
+  const owners = owner !== "" ? owner.split(', ') : [];
+  const whereClauses = [];
+
+  if (keywords.length > 0) {
+    whereClauses.push(
+      ...keywords.map(keyword => ({
+        title: {
+          contains: keyword
+        }
+      }))
+    );
+  }
+
+  if (tagsKeywords.length > 0) {
+    whereClauses.push(
+      ...tagsKeywords.map(keyword => ({
+        tags: {
+          contains: keyword
+        }
+      }))
+    );
+  }
+
+  if (owners.length > 0) {
+    whereClauses.push(
+      ...owners.map(keyword => ({
+        owner: {
+          contains: keyword
+        }
+      }))
+    );
+  }
+
   const result = await prisma.post.findMany({
     where: {
-      OR: [
-        ...keywords.map(keyword => ({
-          title: {
-            contains: keyword
-          }
-        })),
-        ...keywords.map(keyword => ({
-          tags: {
-            contains: keyword
-          }
-        }))
-      ]
+      OR: whereClauses
     }
   });
+
   await prisma.$disconnect();
   return result;
 };
@@ -197,4 +225,31 @@ export const likedPost = async ({
   } catch (error) {
     console.error('Error while processing likePost:', error);
   }
+};
+
+export const deletePost = async ({
+  title, owner, user: { name, password }
+}: {
+  title: string, owner: string, user: { name: string; password: string };
+}) => {
+  const foundUser = await prisma.user.findFirst({
+    where: {
+      name,
+      password
+    }
+  });
+
+  if (!foundUser) {
+    throw new Error("Invalid credentials. User not found or password incorrect.");
+  }
+
+  await prisma.post.deleteMany({
+    where: {
+      title,
+      owner
+    }
+  });
+
+  await prisma.$disconnect();
+  return true;
 };

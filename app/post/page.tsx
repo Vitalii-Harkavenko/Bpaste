@@ -52,6 +52,17 @@ export default function NewPost() {
     	}
   	};
 
+	const handlePostDelete = async () => {
+		const response = await fetch('api/delete-post', {
+			method: "POST",
+			body: JSON.stringify({ title: postData!.title, owner: postData!.owner, user: returnUser() })
+		});
+		const result = await response.json();
+		if (result === true) {
+			window.history.back();
+		}
+	}
+
 	return (
 		<>
 			<main className="grid grid-cols-[60%,40%] gap-8 pl-32 py-8">
@@ -59,11 +70,17 @@ export default function NewPost() {
 					<>
 						<div className="flex flex-col gap-4">
 							<h2>{postData.title}</h2>
-							<pre className="ml-4">{postData.content}</pre>
+							<pre>{postData.content}</pre>
 						</div>
 						<div className="post-info">
 							<div className="flex flex-col gap-4 flex-wrap">
-								<h3>{postData.owner}</h3>
+								<div className="flex justify-between">
+									<h3>{postData.owner}</h3>
+									{
+										postData.owner === returnUser().name &&
+										<button className="filled-button" onClick={handlePostDelete}>Delete post</button>
+									}
+								</div>
 								<div className="flex gap-4 items-center">
 									<p>{postData.date.split('T')[0].replace(/-/g, '.')}</p>
 									<button ref={likeBtn} onClick={handleLike} className="flex gap-2 rounded-md w-fit p-2 hover:bg-[#2e2932]" style={{backgroundColor: `${liked ? "#2e2932": ""}`}}>

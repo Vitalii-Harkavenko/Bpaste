@@ -25,10 +25,10 @@ export default function NewPost() {
 		}
   	};
 	const handleDeleteTag = (tagToDelete: string) => {
-	setTags((prevTags) => {
-		const updatedTags = prevTags.filter((tag) => tag !== tagToDelete);
-		return updatedTags;
-	});
+		setTags((prevTags) => {
+			const updatedTags = prevTags.filter((tag) => tag !== tagToDelete);
+			return updatedTags;
+		});
 	};
 
 	const handleCreatePost = async () => {

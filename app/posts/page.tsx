@@ -30,7 +30,7 @@ export default function Results() {
 		<main className="overflow-y-scroll">
 			{ typeof responseData === "string" ?
 				<div className="items-center w-full h-full flex justify-center">
-					<h3>{responseData}</h3>
+					<h3 className="text-neutral-300">{responseData}</h3>
 				</div>
 			: 
 				responseData.map(item => (

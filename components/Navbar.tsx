@@ -28,7 +28,7 @@ export default function Navbar ({filters}: {filters?: {tags: string[], owners: s
   	return (
 		<nav className="sticky top-0 left-0 w-screen h-20 py-5 px-8 backdrop-blur-xl backdrop-brightness-[.85] grid grid-cols-[1fr,50vw,1fr] gap-8 z-20">
 			<div className="w-10 h-10 relative">
-				<Image src="/assets/logo.png" alt="logo" fill/>
+				<Link href='/'><Image src="/assets/logo.png" alt="logo" fill/></Link>
 			</div>
 			<SearchBar filters={filters}/>
 			<ul className="flex items-center gap-4 ml-auto">

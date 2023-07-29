@@ -73,23 +73,23 @@ export default function NewPost() {
 							<pre>{postData.content}</pre>
 						</div>
 						<div className="post-info">
-							<div className="flex flex-col gap-4 flex-wrap">
-								<div className="flex justify-between">
-									<h3>{postData.owner}</h3>
+							<div className="flex flex-col gap-6 flex-wrap">
+								<div className="flex justify-between items-center">
+									<div className="flex gap-4 items-center">
+										<h3>{postData.owner}</h3>
+										<p>{postData.date.split('T')[0].replace(/-/g, '.')}</p>
+									</div>
 									{
 										postData.owner === returnUser().name &&
 										<button className="filled-button" onClick={handlePostDelete}>Delete post</button>
 									}
 								</div>
-								<div className="flex gap-4 items-center">
-									<p>{postData.date.split('T')[0].replace(/-/g, '.')}</p>
-									<button ref={likeBtn} onClick={handleLike} className="flex gap-2 rounded-md w-fit p-2 hover:bg-[#2e2932]" style={{backgroundColor: `${liked ? "#2e2932": ""}`}}>
-										<div className="relative h-6 w-6">
-											<Image src="assets/like.svg" alt="like" fill />
-										</div>
-										{postData.likes}
-									</button>
-								</div>
+								<button ref={likeBtn} onClick={handleLike} className="flex gap-2 rounded-md w-fit p-2 hover:bg-[#2e2932]" style={{backgroundColor: `${liked ? "#2e2932": ""}`}}>
+									<div className="relative h-6 w-6">
+										<Image src="assets/like.svg" alt="like" fill />
+									</div>
+									{postData.likes}
+								</button>
 								{postData.tags[0] !== '' && postData.tags.map((tag, index) => (
 									<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
 										{tag}

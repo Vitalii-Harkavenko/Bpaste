@@ -14,7 +14,7 @@ export default function NewPost() {
 	const router = useRouter();
 
     const handleAddTag = () => {
-		if (tags.length >= 7 || tag.trim().length > 20) {
+		if (tags.length >= 10 || tag.trim().length > 20) {
 			setTagErrorMessage(true);
 			const timeout = setTimeout(() => {setTagErrorMessage(false)}, 3000);
       		return () => clearTimeout(timeout);
@@ -24,6 +24,7 @@ export default function NewPost() {
 			setTag('');
 		}
   	};
+	
 	const handleDeleteTag = (tagToDelete: string) => {
 		setTags((prevTags) => {
 			const updatedTags = prevTags.filter((tag) => tag !== tagToDelete);

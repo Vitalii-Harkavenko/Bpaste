@@ -74,7 +74,7 @@ export default function Results() {
 						))
 					}
 				</div>
-				<div className="flex flex-col gap-4 p-8">
+				<div className="flex flex-col gap-4 px-16 py-8">
 					<div className="flex justify-between">
 						<input 
 							placeholder="by tags"
@@ -84,7 +84,7 @@ export default function Results() {
 						/>
 						<button 
 							className="empty-button"
-							onClick={() => {setTags([...tags, tag]); setTag('')}}
+							onClick={() => {if (tag === '') return; setTags([...tags, tag]); setTag('')}}
 						>Add tag</button>
 					</div>
 					<div className="flex gap-4 flex-wrap w-full">
@@ -104,7 +104,7 @@ export default function Results() {
 						/>
 						<button 
 							className="empty-button"
-							onClick={() => {setOwners([...owners, owner]); setOwner('')}}
+							onClick={() => {if (owner === '') return; setOwners([...owners, owner]); setOwner('')}}
 						>Add owner</button>
 					</div>
 					<div className="flex gap-4 flex-wrap w-full">

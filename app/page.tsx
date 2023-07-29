@@ -11,7 +11,7 @@ export default async function Home() {
         <main className="relative overflow-hidden flex flex-col z-10 bg-gradient-to-t from-black via-[rgba(2,0,89,0.5)] to-transparent">
           <Navbar />
           <h1 className="
-            bg-gradient-to-br from-pink-300 to-pink-50 bg-clip-text text-transparent
+            bg-gradient-to-br from-fuchsia-200 to-fuchsia-50 bg-clip-text text-transparent
             w-1/2 text-center mx-auto my-auto
           ">
             Store your reusable stuff and don't write it twice

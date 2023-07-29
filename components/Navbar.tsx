@@ -5,7 +5,7 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import { checkUser, checkAndReturnUser } from "@/app/utils";
 
-export default function Navbar () {
+export default function Navbar ({filters}: {filters?: {tags: string[], owners: string[]}}) {
 
 	const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
@@ -30,7 +30,7 @@ export default function Navbar () {
 			<div className="w-10 h-10 relative">
 				<Image src="/assets/logo.png" alt="logo" fill/>
 			</div>
-			<SearchBar />
+			<SearchBar filters={filters}/>
 			<ul className="flex items-center gap-4 ml-auto">
 				{loggedIn ?
   					<>

@@ -23,7 +23,7 @@ export default function RootLayout(
   return (
     <html lang="en">
       <body className={`${inter.className} ${montserrat.variable}`}>
-        {pathname.startsWith('/auth') || pathname === "/" ? null : <Navbar />}
+        {pathname.startsWith('/auth') || pathname === "/" || pathname === "/results"? null : <Navbar />}
         {children}
       </body>
     </html>

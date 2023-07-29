@@ -43,7 +43,7 @@ export const searchQuery = async ({
 
   const result = await prisma.post.findMany({
     where: {
-      OR: whereClauses
+      AND: whereClauses
     }
   });
 

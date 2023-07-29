@@ -3,14 +3,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
 
-export default function SearchBar() {
+export default function SearchBar({filters}: {filters?: {tags: string[], owners: string[]}}) {
 
 	const [searchValue, setSearchValue] = useState<string>();
 	const router = useRouter();
 	
 	const handleSubmit = () => {
 		if (searchValue === "") return;
-		router.push(`/results?search=${searchValue}`)
+		router.push(`/results?search=${searchValue}${filters?.owners[0] ? "&owners=" + filters.owners : ''}${filters?.tags[0] ? "&tags=" + filters.tags : ''}`)
 	};
 
 	return (

@@ -240,6 +240,7 @@ export const deletePost = async ({
   });
 
   if (!foundUser) {
+    await prisma.$disconnect();
     throw new Error("Invalid credentials. User not found or password incorrect.");
   }
 

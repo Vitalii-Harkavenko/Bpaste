@@ -68,7 +68,7 @@ export default function NewPost() {
 			<main className="grid grid-cols-[60%,40%] gap-8 pl-32 py-8">
 				{ postData &&
 					<>
-						<div className="flex flex-col gap-4">
+						<div className="flex flex-col gap-4 overflow-scroll h-[85vh]">
 							<h2>{postData.title}</h2>
 							<pre>{postData.content}</pre>
 						</div>
@@ -90,11 +90,13 @@ export default function NewPost() {
 									</div>
 									{postData.likes}
 								</button>
-								{postData.tags[0] !== '' && postData.tags.map((tag, index) => (
-									<div key={index} className="w-fit h-fit flex items-center gap-2 py-2 px-2 rounded-md text-black bg-violet-200 hover:bg-violet-300 transition-all duration-300">
-										{tag}
-									</div>
-								))}
+								<div className="flex flex-wrap gap-4">
+									{postData.tags[0] !== '' && postData.tags.map((tag, index) => (
+										<div key={index} className="w-fit h-fit flex items-center p-2 rounded-md text-black bg-violet-200">
+											{tag}
+										</div>
+									))}
+								</div>
 							</div>
 						</div>
 					</>

@@ -8,7 +8,7 @@ export default async function Home() {
     <>
       <div className="relative w-full h-full overflow-hidden">
         <Image src="/assets/hero.png" alt="coding boilerplates image" className="absolute" fill />
-        <main className="relative overflow-hidden flex flex-col z-10 bg-gradient-to-t from-black via-[rgba(2,0,89,0.5)] to-transparent">
+        <main className="relative overflow-hidden flex flex-col z-10 bg-gradient-to-t from-black via-[rgba(16,15,66,0.5)] to-transparent">
           <Navbar />
           <h1 className="
             bg-gradient-to-br from-fuchsia-200 to-fuchsia-50 bg-clip-text text-transparent

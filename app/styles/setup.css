@@ -42,11 +42,10 @@ p,
 pre,
 input,
 textarea {
-	font-size: 1rem;
-	@apply bg-transparent outline-none text-text-color
+	@apply bg-transparent outline-none text-text-color text-base
 }
 main {
-	@apply text-text-color w-full h-full relative z-20
+	@apply text-text-color w-screen h-screen relative z-20
 }
 *::-webkit-scrollbar {
 	width: 0px;

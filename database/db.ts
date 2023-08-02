@@ -254,3 +254,32 @@ export const deletePost = async ({
   await prisma.$disconnect();
   return true;
 };
+export const getRandomPosts = async () => {
+
+  const allPostIDs = await prisma.post.findMany({
+    select: { id: true },
+  });
+
+  const randomIndexes: number[] = [];
+
+  while (randomIndexes.length < 3 && allPostIDs.length > 0) {
+
+    const randomIndex = Math.floor(Math.random() * allPostIDs.length);
+
+    if (!randomIndexes.includes(randomIndex)) {
+      randomIndexes.push(randomIndex);
+    };
+  };
+  
+  const randomPostIDs = randomIndexes.map((index) => allPostIDs[index].id);
+
+  const randomPosts = await prisma.post.findMany({
+    where: {
+      id: {
+        in: randomPostIDs,
+      },
+    },
+  });
+
+  return randomPosts;
+}

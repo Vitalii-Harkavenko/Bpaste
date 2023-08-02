@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
 
@@ -16,8 +15,8 @@ export default function SearchBar({filters}: {filters?: {tags: string[], owners:
 	return (
 		<div className="w-full h-full bg-[#1d1e2a] text-text-color rounded-md px-6 items-center flex">
 			<input 
-				className="bg-transparent outline-none"
-				placeholder="Search for anything"
+				className="bg-transparent outline-none w-full"
+				placeholder="Search for a snippet"
 				type="text"
 				value={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}

@@ -1,8 +1,22 @@
+"use client"
 import Image from "next/image"
 import CardHero from "../components/CardHero"
 import Navbar from "@/components/Navbar"
+import { useState, useEffect } from "react"
 
-export default async function Home() {
+export default function Home() {
+  const [randomPosts, setRandomPosts] = useState([]);
+  useEffect(() => {getResponse()}, []);
+
+	const getResponse = async () => {
+    try {
+      const response = await fetch(`api/random-posts`);
+			const data = await response.json();
+      setRandomPosts(data)
+		} catch(err) {
+			console.log("Error fetching random posts:", err)
+		}
+	};
 
   return (
     <>
@@ -17,11 +31,9 @@ export default async function Home() {
             Store your reusable stuff and don't write it twice
           </h1>
           <div className="flex gap-12 mb-[10vh]">
-            <CardHero />
-            <CardHero />
-            <CardHero />
-            <CardHero />
-            <CardHero />
+            {randomPosts.map(post => 
+              <CardHero post={post}/>
+            )}
           </div>
         </main>
       </div>

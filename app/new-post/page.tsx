@@ -33,7 +33,7 @@ export default function NewPost() {
 	};
 
 	const handleCreatePost = async () => {
-		if (title === "" || content === "" || content.length < 50 || content.length > 7000) {
+		if (title === "" || content === "" || content.length < 50 || content.length > 7000 || title.length > 40) {
 			setPostErrorMessage(true);
 			const timeout = setTimeout(() => {setPostErrorMessage(false)}, 3000);
       		return () => clearTimeout(timeout);
@@ -65,7 +65,7 @@ export default function NewPost() {
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
 					/>
-					{postErrorMessage && <p className="text-red-400">The title/content is empty or you already have a post with that name</p>}
+					{postErrorMessage && <p className="text-red-400">The title/content length is wrong or you already have a post with that name</p>}
 					<textarea
 						placeholder="Snippet"
 						value={content}

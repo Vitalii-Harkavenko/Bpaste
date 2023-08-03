@@ -55,16 +55,16 @@ export default function Results() {
 						</div>
 					: 
 						responseData.map(item => (
-							<div onClick={() => handleRedirect(item.owner, item.title)} key={item.id} className="w-full grid grid-cols-3 items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
+							<div onClick={() => handleRedirect(item.owner, item.title)} key={item.id} className="w-full grid grid-cols-[50%,1fr,1fr] items-center py-8 px-16 bg-gradient-to-r from-transparent to-transparent hover:from-[#281E3D]">
 								<div>
-									<div className="flex gap-4 mb-4">
-										<div className="rounded-full bg-slate-400 w-10 h-10 flex items-center justify-center text-black">{item.owner[0]}</div>
+									<div className="grid grid-cols-[2.5rem,1fr] gap-4 mb-4">
+										<div className="rounded-full bg-gradient-to-bl from-blue-500 to-purple-300 text-white w-10 h-10 flex items-center justify-center">{item.owner[0]}</div>
 										<h3>{item.title}</h3>
 									</div>
 									<p>{item.content.slice(0, 30)}...</p>
 								</div>
-								<p>{item.date.split('T')[0].replace(/-/g, '.')}</p>
-								<div className="flex gap-2">
+								<p className="mx-auto">{item.date.split('T')[0].replace(/-/g, '.')}</p>
+								<div className="flex gap-2 mx-auto">
 									<div className="relative h-6 w-6">
 										<Image src="assets/like.svg" alt="like" fill />
 									</div>

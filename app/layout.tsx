@@ -1,9 +1,6 @@
-"use client"
-
-import Navbar from "@/components/Navbar"
 import "./styles"
 import { Inter, Montserrat } from 'next/font/google'
-import { usePathname } from 'next/navigation'
+import NavbarOnCondition from "@/components/NavbarOnCondition"
 
 const inter = Inter({ subsets: ['latin'] })
 const montserrat = Montserrat({ 
@@ -19,11 +16,10 @@ export const metadata = {
 export default function RootLayout(
 	{ children }: { children: React.ReactNode }
 ) {
-  const pathname = usePathname();
   return (
     <html lang="en">
       <body className={`${inter.className} ${montserrat.variable}`}>
-        {pathname.startsWith('/auth') || pathname === "/" || pathname === "/results"? null : <Navbar />}
+        <NavbarOnCondition />
         {children}
       </body>
     </html>

@@ -22,17 +22,17 @@ export default function Home() {
   return (
     <>
       <div className="relative w-full h-full overflow-hidden">
-        <div className="absolute -left-1/4 w-full h-full">
+        <div className="absolute -left-[17%] h-full aspect-[16/9]">
           <Image src="/assets/hero.png" alt="coding boilerplates image" className="absolute" fill />
         </div>
         <div className="absolute w-3/4 h-full top-0 right-0 bg-gradient-to-l from-[#042A3F] via-[#111622] to-transparent "></div>
-        <main className="relative overflow-hidden flex flex-col z-10 bg-gradient-to-t from-black via-[rgba(16,15,66,0.5)] to-transparent">
+        <main className="relative overflow-hidden flex flex-col z-10 bg-gradient-to-t from-black to-transparent">
           <Navbar />
           <div className="absolute w-1/2 left-16 top-[15%]">
-            <h1 className="bg-gradient-to-br from-purple-300 to-purple-100 bg-clip-text text-transparent">
-              Store your reusable stuff and don't write it twice
+            <h1 className="bg-gradient-to-br from-fuchsia-200 to-fuchsia-100 bg-clip-text text-transparent">
+              You don't need to write the same thing twice
             </h1>
-            <h2 className="bg-gradient-to-br brightness-90 from-purple-100 to-purple-200 bg-clip-text text-transparent w-1/2">
+            <h2 className="brightness-9 text-fuchsia-200 w-1/2">
               Because you can store the boilerplate here
             </h2>
           </div>
@@ -46,12 +46,12 @@ export default function Home() {
                   </div>
                 </Link>
                 <Link href={`/post?user=${randomPosts[1].owner}&post=${randomPosts[1].title}`}>
-                  <div className="absolute left-[40%] top-[30%] z-20">
+                  <div className="absolute left-[40%] top-[35%] z-20">
                     <CardHero post={randomPosts[1]}/>
                   </div>
                 </Link>
                 <Link href={`/post?user=${randomPosts[2].owner}&post=${randomPosts[2].title}`}>
-                  <div className="absolute left-[10%] top-[45%] z-10">
+                  <div className="absolute left-[10%] top-[55%] z-10">
                     <CardHero post={randomPosts[2]}/>
                   </div>
                 </Link>

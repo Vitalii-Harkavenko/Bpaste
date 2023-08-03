@@ -15,4 +15,7 @@
 }
 .post-info {
 	@apply flex flex-col gap-8 py-8 pl-16 pr-32 w-full h-full;
-};
+}
+.card-shadow {
+	filter: drop-shadow(-10px -10px 12px rgba(0, 0, 0, 0.3));
+}

@@ -1,6 +1,6 @@
 const CardHero = ({post}: any) => {
   return (
-    <div className="px-8 w-[40vw] h-[50vw] py-4 bg-gradient-to-r from-[#192234] to-[#10151F] rounded-md">
+    <div className="p-8 w-[40vw] h-[100vh] bg-gradient-to-br from-[#192234] to-[#10151F] rounded-md card-shadow">
       {
         post &&
         <>

@@ -37,7 +37,7 @@ export default function NewPost() {
 			setPostErrorMessage(true);
 			const timeout = setTimeout(() => {setPostErrorMessage(false)}, 3000);
       		return () => clearTimeout(timeout);
-		};
+		}
 		const user = returnUser();
 		const existingPost = await fetch(`/api/post?user=${user.name}&post=${title}`, {
 			method: "GET"
@@ -47,7 +47,7 @@ export default function NewPost() {
 			setPostErrorMessage(true);
 			const timeout = setTimeout(() => {setPostErrorMessage(false)}, 3000);
       		return () => clearTimeout(timeout);
-		};
+		}
 		await fetch('/api/create-post', {
 			method: 'POST',
 			body: JSON.stringify({title, content, tags, user}),

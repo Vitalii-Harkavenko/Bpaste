@@ -29,29 +29,34 @@ export default function Home() {
         <main className="relative overflow-hidden flex flex-col z-10 bg-gradient-to-t from-black via-[rgba(16,15,66,0.5)] to-transparent">
           <Navbar />
           <div className="absolute w-1/2 left-16 top-[15%]">
-            <h1 className="bg-gradient-to-br from-fuchsia-200 to-fuchsia-50 bg-clip-text text-transparent">
+            <h1 className="bg-gradient-to-br from-purple-300 to-purple-100 bg-clip-text text-transparent">
               Store your reusable stuff and don't write it twice
             </h1>
-            <h2 className="bg-gradient-to-br brightness-[.85] from-fuchsia-100 to-fuchsia-200 bg-clip-text text-transparent w-1/2">
+            <h2 className="bg-gradient-to-br brightness-90 from-purple-100 to-purple-200 bg-clip-text text-transparent w-1/2">
               Because you can store the boilerplate here
             </h2>
           </div>
           <div className="relative w-full h-full">
-            <Link href={`/post?user=${randomPosts[0].owner}&post=${randomPosts[0].title}`}>
-              <div className="absolute left-[70%] top-[15%] z-30">
-                <CardHero post={randomPosts[0]}/>
-              </div>
-            </Link>
-            <Link href={`/post?user=${randomPosts[1].owner}&post=${randomPosts[1].title}`}>
-              <div className="absolute left-[40%] top-[30%] z-20">
-                <CardHero post={randomPosts[1]}/>
-              </div>
-            </Link>
-            <Link href={`/post?user=${randomPosts[2].owner}&post=${randomPosts[2].title}`}>
-              <div className="absolute left-[10%] top-[45%] z-10">
-                <CardHero post={randomPosts[2]}/>
-              </div>
-            </Link>
+            {
+              randomPosts[0] && 
+              <>
+                <Link href={`/post?user=${randomPosts[0].owner}&post=${randomPosts[0].title}`}>
+                  <div className="absolute left-[70%] top-[15%] z-30">
+                    <CardHero post={randomPosts[0]}/>
+                  </div>
+                </Link>
+                <Link href={`/post?user=${randomPosts[1].owner}&post=${randomPosts[1].title}`}>
+                  <div className="absolute left-[40%] top-[30%] z-20">
+                    <CardHero post={randomPosts[1]}/>
+                  </div>
+                </Link>
+                <Link href={`/post?user=${randomPosts[2].owner}&post=${randomPosts[2].title}`}>
+                  <div className="absolute left-[10%] top-[45%] z-10">
+                    <CardHero post={randomPosts[2]}/>
+                  </div>
+                </Link>
+              </>
+            }
           </div>
         </main>
       </div>

@@ -25,7 +25,7 @@ const LogIn = () => {
 			}, 3000);
 
 			return;
-		};
+		}
 		localStorage.setItem('user', JSON.stringify(result));
 		navigateToBaseUrl(router);
 	};

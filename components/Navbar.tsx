@@ -34,8 +34,8 @@ export default function Navbar ({filters}: {filters?: {tags: string[], owners: s
 			<ul className="flex items-center gap-4 ml-auto">
 				{loggedIn ?
   					<>
-						<li><Link href='/posts'><p>Posts</p></Link></li>
-						<li><Link href='/new-post'><p>New post</p></Link></li>
+						<li><Link href='/posts'><p className="hover:text-white">Posts</p></Link></li>
+						<li><Link href='/new-post'><p className="hover:text-white">New post</p></Link></li>
 						<li><div className="rounded-full bg-gradient-to-bl from-blue-500 to-purple-300 w-10 h-10 text-xl text-white flex items-center justify-center">{getFirstLetterOfName()}</div></li>
 					</>
 				:

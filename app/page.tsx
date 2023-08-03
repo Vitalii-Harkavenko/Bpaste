@@ -37,26 +37,21 @@ export default function Home() {
             </h2>
           </div>
           <div className="relative w-full h-full">
-            {
-              randomPosts[0] && 
-              <>
-                <Link href={`/post?user=${randomPosts[0].owner}&post=${randomPosts[0].title}`}>
-                  <div className="absolute left-[70%] top-[15%] z-30">
-                    <CardHero post={randomPosts[0]}/>
-                  </div>
-                </Link>
-                <Link href={`/post?user=${randomPosts[1].owner}&post=${randomPosts[1].title}`}>
-                  <div className="absolute left-[40%] top-[30%] z-20">
-                    <CardHero post={randomPosts[1]}/>
-                  </div>
-                </Link>
-                <Link href={`/post?user=${randomPosts[2].owner}&post=${randomPosts[2].title}`}>
-                  <div className="absolute left-[10%] top-[45%] z-10">
-                    <CardHero post={randomPosts[2]}/>
-                  </div>
-                </Link>
-              </>
-            }
+            <Link href={`/post?user=${randomPosts[0].owner}&post=${randomPosts[0].title}`}>
+              <div className="absolute left-[70%] top-[15%] z-30">
+                <CardHero post={randomPosts[0]}/>
+              </div>
+            </Link>
+            <Link href={`/post?user=${randomPosts[1].owner}&post=${randomPosts[1].title}`}>
+              <div className="absolute left-[40%] top-[30%] z-20">
+                <CardHero post={randomPosts[1]}/>
+              </div>
+            </Link>
+            <Link href={`/post?user=${randomPosts[2].owner}&post=${randomPosts[2].title}`}>
+              <div className="absolute left-[10%] top-[45%] z-10">
+                <CardHero post={randomPosts[2]}/>
+              </div>
+            </Link>
           </div>
         </main>
       </div>
